@@ -1,0 +1,6 @@
+include ":MoonGenesis:API:CloudConcepts"
+include ":MoonGenesis:Core:CLI"
+include ":MoonGenesis:Core:StandAloneDeployer"
+include ":MoonGenesis:GradlePlugins:GradleGruntPlugin"
+include ":MoonGenesis:GradlePlugins:GradleMoonGenesisPlugin"
+
