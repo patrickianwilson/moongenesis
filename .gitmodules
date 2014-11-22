@@ -1,0 +1,6 @@
+[submodule "Libraries/cli-actions"]
+	path = Libraries/cli-actions
+	url = git@github.com:patrickianwilson/cli-actions.git
+[submodule "Libraries/test-utils"]
+	path = Libraries/test-utils
+	url = git@github.com:patrickianwilson/test-utils.git
