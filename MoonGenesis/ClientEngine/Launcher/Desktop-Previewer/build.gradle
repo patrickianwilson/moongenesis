@@ -1,0 +1,5 @@
+apply from: "$rootProject.projectDir/config/gradle-templates/includes/java-client-conventions.gradle"
+
+dependencies {
+
+}

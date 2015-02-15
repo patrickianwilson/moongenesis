@@ -1,6 +1,26 @@
-include ":MoonGenesis:API:CloudConcepts"
-include ":MoonGenesis:Core:CLI"
-include ":MoonGenesis:Core:StandAloneDeployer"
-include ":MoonGenesis:GradlePlugins:GradleGruntPlugin"
-include ":MoonGenesis:GradlePlugins:GradleMoonGenesisPlugin"
+include ":MoonGenesis:API:SDK:Client"
+include ":MoonGenesis:API:SDK:Server"
+include ":MoonGenesis:API:SDK:Model"
+
+include ":MoonGenesis:ClientEngine:Audio:Audio-Web"
+
+include ":MoonGenesis:ClientEngine:Graphics:Graphics-Core"
+include ":MoonGenesis:ClientEngine:Graphics:Graphics-Mac"
+include ":MoonGenesis:ClientEngine:Graphics:Graphics-Web"
+
+include ":MoonGenesis:ClientEngine:Input:Input-Web"
+
+include ":MoonGenesis:ClientEngine:Launcher:Desktop-Previewer"
+include ":MoonGenesis:ClientEngine:Launcher:Launcher-Web"
+
+include ":MoonGenesis:Services:StateReplicationService"
+include ":MoonGenesis:Services:UserService"
+
+include ":MoonGenesis:Tooling:CLI"
+
+//add our submodule libraries
+include ":Libraries:cli-actions"
+
+//for easier testing
+include ":Samples:my-first-game"
 

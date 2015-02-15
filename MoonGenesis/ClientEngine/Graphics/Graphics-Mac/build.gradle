@@ -1,0 +1,6 @@
+apply from: "$rootProject.projectDir/config/gradle-templates/includes/java-client-conventions.gradle"
+
+
+dependencies {
+    compile fileTree(dir: "$rootProject.projectDir/Libraries/jogl/mac", include: "*.jar")
+}

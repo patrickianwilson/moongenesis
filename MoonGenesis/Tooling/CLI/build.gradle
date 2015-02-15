@@ -1,0 +1,6 @@
+apply from: "$rootProject.projectDir/config/gradle-templates/includes/groovy-conventions.gradle"
+
+dependencies {
+    compile 'commons-io:commons-io:2.4'
+    compile project(":Libraries:cli-actions")
+}

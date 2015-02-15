@@ -1,0 +1,6 @@
+{
+  "name":"My First Game",
+  "main-scene":"scenes/main-scene",
+  "controller":"sample.controllers.GameController"
+
+}
