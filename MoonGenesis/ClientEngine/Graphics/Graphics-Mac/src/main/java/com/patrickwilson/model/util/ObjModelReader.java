@@ -1,12 +1,11 @@
 package com.patrickwilson.model.util;
 
-import com.patrickwilson.model.Face3D;
-import com.patrickwilson.model.MeshModel;
-import com.patrickwilson.model.Point3D;
-import com.patrickwilson.model.Vector3D;
 
-import javax.naming.LinkLoopException;
-import java.awt.*;
+import com.patrickwilson.moongenesis.resource.types.Face3D;
+import com.patrickwilson.moongenesis.resource.types.Point3D;
+import com.patrickwilson.moongenesis.resource.types.SceneNode;
+import com.patrickwilson.moongenesis.resource.types.Vector3D;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -15,15 +14,15 @@ import java.util.Scanner;
 /**
  * Created by pwilson on 2/14/15.
  */
-public class ModelReader {
+public class ObjModelReader {
 
     private InputStream modelStream;
-    public ModelReader(InputStream model) {
+    public ObjModelReader(InputStream model) {
         this.modelStream = model;
     }
 
-    public MeshModel load() {
-        MeshModel result = new MeshModel();
+    public SceneNode load() {
+        SceneNode result = new SceneNode();
 
         Scanner objFileScanner = new Scanner(modelStream);
 
@@ -132,11 +131,11 @@ public class ModelReader {
     }
 
     public static void main(String ... args) {
-        InputStream sampleModelStream = ModelReader.class.getResourceAsStream("/cube.obj");
+        InputStream sampleModelStream = ObjModelReader.class.getResourceAsStream("/cube.obj");
 
-        ModelReader reader = new ModelReader(sampleModelStream);
+        ObjModelReader reader = new ObjModelReader(sampleModelStream);
 
-        MeshModel model = reader.load();
+        SceneNode model = reader.load();
 
         System.out.println("Finished");
 

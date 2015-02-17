@@ -1,4 +1,4 @@
-package com.patrickwilson.model;
+package com.patrickwilson.moongenesis.resource.types;
 
 /**
  * Created by pwilson on 2/14/15.

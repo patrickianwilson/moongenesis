@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableMap
 import com.patrickwilson.cli.actions.ApplicationAction
 import com.patrickwilson.cli.actions.Main
 import com.patrickwilson.moongenesis.tools.cli.actions.CreateProjectAction
+import com.patrickwilson.moongenesis.tools.cli.actions.ImportObjModelAction
+import com.patrickwilson.moongenesis.tools.cli.actions.PreviewSceneAction
 
 /**
  * Created by pwilson on 2/14/15.
@@ -12,9 +14,11 @@ class Run {
 
     public static void main(String... args) {
 
-        com.patrickwilson.cli.actions.Main runner = new Main("engine", new ImmutableMap.Builder<String, ApplicationAction>()
+        Main runner = new Main("engine", new ImmutableMap.Builder<String, ApplicationAction>()
 
                 .put("new-project", new CreateProjectAction())
+                .put("import-obj-model", new ImportObjModelAction())
+                .put("preview", new PreviewSceneAction())
 
                 .build(),
                 ImmutableMap.builder()

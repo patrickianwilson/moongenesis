@@ -3,4 +3,6 @@ apply from: "$rootProject.projectDir/config/gradle-templates/includes/groovy-con
 dependencies {
     compile 'commons-io:commons-io:2.4'
     compile project(":Libraries:cli-actions")
+    compile project(":MoonGenesis:ClientEngine:Launcher:Desktop-Previewer")
+    compile "com.google.code.gson:gson:2.2.4"
 }

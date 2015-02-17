@@ -1,5 +1,7 @@
 apply from: "$rootProject.projectDir/config/gradle-templates/includes/java-client-conventions.gradle"
-
 dependencies {
+//    compile 'commons-io:commons-io:2.4'
+    compile "com.google.code.gson:gson:2.2.4"
     compile project (":MoonGenesis:ClientEngine:Resource:Resource-Core")
+    compile project (":MoonGenesis:ClientEngine:Graphics:Graphics-Mac")
 }

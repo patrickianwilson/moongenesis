@@ -1,22 +1,18 @@
 
 
 import com.jogamp.opengl.util.FPSAnimator;
-import com.patrickwilson.model.Face3D;
-import com.patrickwilson.model.MeshModel;
-import com.patrickwilson.model.Point3D;
-import com.patrickwilson.model.util.ModelReader;
+import com.patrickwilson.model.*;
+import com.patrickwilson.model.util.ObjModelReader;
+import com.patrickwilson.moongenesis.resource.types.Face3D;
+import com.patrickwilson.moongenesis.resource.types.Scene;
+import com.patrickwilson.moongenesis.resource.types.SceneNode;
 
 import javax.media.opengl.*;
 import javax.media.opengl.awt.GLCanvas;
 import javax.media.opengl.glu.GLU;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.InputStream;
-import java.nio.FloatBuffer;
 
 /**
  * Created by pwilson on 2/14/15.
@@ -24,7 +20,12 @@ import java.nio.FloatBuffer;
 public class OpenGlTest implements GLEventListener {
 
     private GLU glu = new GLU();
-    public MeshModel model;
+    public SceneNode model;
+
+    /* maintain reference for easier rotation*/
+    public SceneNode roofPointer;
+
+    public static NativeTransformationAdaptor adaptor = new NativeTransformationAdaptor();
     static {
         GLProfile.initSingleton();
     }
@@ -41,18 +42,60 @@ public class OpenGlTest implements GLEventListener {
 
     @Override
     public void display(GLAutoDrawable glAutoDrawable) {
+        float[] rotation = this.roofPointer.getRotationTransformation();
+        //make the roof spin.
+        rotation[0] = (rotation[0] + 1) % 360;
+        this.roofPointer.setRotationTransformation(rotation);
+
         GL2 gl = glAutoDrawable.getGL().getGL2();
-        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
+
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
         gl.glShadeModel(GL2.GL_SMOOTH);
 
         gl.glMaterialfv(GL2.GL_FRONT, GL2.GL_SPECULAR, new float[]{1.0f, 1.0f, 1.0f, 1.0f}, 0);
         gl.glMaterialf(GL2.GL_FRONT, GL2.GL_SHININESS, 50.0f);
         gl.glLightfv(GL2.GL_LIGHT0, GL2.GL_POSITION, new float[]{ 1.0f, 1.0f, 1.0f, 0.0f }, 0);
-        //move the camera back 6 units
-        gl.glTranslatef(0.0f, 0.0f, -12.0f);
+
+        gl.glEnable(GL2.GL_LIGHTING);
+        gl.glEnable(GL2.GL_LIGHT0);
+        gl.glEnable(GL2.GL_DEPTH_TEST);
+        //position the camera off to the side and up.  Looking at origin.
+       glu.gluLookAt(10.0f, 10.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+//        gl.glTranslatef(0.0f, 0.0f, -12.0f);
 
         //now draw at origin
+        drawModelNode(gl, model);
+
+
+
+
+
+        gl.glFlush();
+    }
+
+    public void drawModelNode(GL2 gl, SceneNode node) {
+        if (node.getChildren() != null && node.getChildren().length > 0) {
+            gl.glPushMatrix();
+            for (SceneNode child: node.getChildren()) {
+                //recursively draw children
+                drawModelNode(gl, child);
+            }
+            gl.glPopMatrix();
+        } else if (node.getFaces() != null && node.getFaces().length > 0){
+            drawMeshModel(gl, node);
+        }
+    }
+
+    private void drawMeshModel(GL2 gl, SceneNode model) {
+        //setup transformations
+
+
+        gl.glScalef(model.getScaleTransformation()[0],model.getScaleTransformation()[1],model.getScaleTransformation()[2]);
+        gl.glTranslatef(model.getPositionTransformation()[0], model.getPositionTransformation()[1], model.getPositionTransformation()[2]);
+        gl.glRotatef(model.getRotationTransformation()[0],model.getRotationTransformation()[1],model.getRotationTransformation()[2], model.getRotationTransformation()[3]);
+        gl.glPushMatrix();
         gl.glBegin(GL2.GL_TRIANGLES);
         for (Face3D face: model.faces) {
             for (int i = 0; i < face.vertices.length; i++)  {
@@ -63,34 +106,8 @@ public class OpenGlTest implements GLEventListener {
             }
         }
         gl.glEnd();
-
-
-        gl.glEnable(GL2.GL_LIGHTING);
-        gl.glEnable(GL2.GL_LIGHT0);
-        gl.glEnable(GL2.GL_DEPTH_TEST);
-
-
-
-
-//        gl.glBegin(GL2.GL_TRIANGLES);
-//        {
-//            gl.glVertex3f(0.0f, 1.0f, 0.0f);
-//            gl.glVertex3f(-1.0f, -1.0f, 0.0f);
-//            gl.glVertex3f(1.0f, -1.0f, 0.0f);
-//        }
-//        gl.glEnd();
-//        gl.glTranslatef(3.0f, 0.0f, 0.0f);
-//        gl.glBegin(GL2.GL_QUADS);
-//        {
-//            gl.glVertex3f(-1.0f, 1.0f, 0.0f);
-//            gl.glVertex3f(1.0f, 1.0f, 0.0f);
-//            gl.glVertex3f(1.0f, -1.0f, 0.0f);
-//            gl.glVertex3f(-1.0f, -1.0f, 0.0f);
-//        }
-//        gl.glEnd();
-        gl.glFlush();
+        gl.glPopMatrix();
     }
-
 
 
     @Override
@@ -104,8 +121,8 @@ public class OpenGlTest implements GLEventListener {
 
         float aspect = width / height;
 
-        glu.gluPerspective(45.0f, aspect, 1.0, 200.0);
-        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        glu.gluPerspective(30.0f, aspect, 3.0, 20);
+
 
 
     }
@@ -113,10 +130,11 @@ public class OpenGlTest implements GLEventListener {
     public static void main(String... args) {
 
         //load the test model
-        InputStream sampleModelStream = ModelReader.class.getResourceAsStream("/cube.obj");
+        InputStream buildingModelReaderInput = ObjModelReader.class.getResourceAsStream("/cubbuilding.obj");
+        InputStream rootModelReaderInput = ObjModelReader.class.getResourceAsStream("/sphere-roof.obj");
 
-        ModelReader reader = new ModelReader(sampleModelStream);
-
+        ObjModelReader buildingModelReader = new ObjModelReader(buildingModelReaderInput);
+        ObjModelReader roofModelReader = new ObjModelReader(rootModelReaderInput);
 
 
         final GLProfile profile = GLProfile.get(GLProfile.GL2);
@@ -124,38 +142,29 @@ public class OpenGlTest implements GLEventListener {
         GLCanvas canvas = new GLCanvas(capabilities);
 
         OpenGlTest instance = new OpenGlTest();
-        instance.model = reader.load();
+        SceneNode building = buildingModelReader.load();
+//        building.setPositionTransformation(new float[]{0.0f, -3.0f, 0.0f});
+        instance.roofPointer = roofModelReader.load();
+//        instance.roofPointer.setPositionTransformation(new float[]{ 2.36f, -0.420f, 1.412f});
+        instance.roofPointer.setPositionTransformation(new float[]{ -0.420f, 1.412f, 2.36f});
+        instance.roofPointer.setRotationTransformation(adaptor.buildPrimitiveRotationTransformation(0.0f, 0.0f, 1.0f, 0.0f));
+
+
+//        instance.model = building;
+
+        instance.model = Scene.builder().addNode(building).addNode(instance.roofPointer).build();
+
         canvas.addGLEventListener(instance);
         canvas.setSize(400, 400);
         final FPSAnimator animator = new FPSAnimator(canvas, 300, true);
-//        JFrame frame = new JFrame("My Window");
-//        frame.getContentPane().add(canvas);
-//
-//        frame.addWindowListener(new WindowAdapter() {
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                super.windowClosing(e);
-//                  if (animator.isAnimating()) {
-//                      animator.stop();
-//                  }
-//            }
-//        });
-//
-//        frame.setSize(frame.getContentPane().getPreferredSize());
+
+        animator.start();
 
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         JFrame mainWindow = new JFrame();
         mainWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
         mainWindow.setLocation(0, 0);
-//        Window window = env.getDefaultScreenDevice().getFullScreenWindow();
-//        //this can help with better support for multiple monitors.
-//        GraphicsDevice mainScreen = env.getDefaultScreenDevice();
-//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        int winX = (int)Math.max(0, (screenSize.getWidth() - frame.getWidth())/2);
-//        int winY = (int)Math.max(0, (screenSize.getHeight() - frame.getHeight())/2);
-//
-//        frame.setLocation(winX, winY);
-//        frame.setVisible(true);
+
 
         mainWindow.setVisible(true);
         mainWindow.add(canvas);
@@ -202,6 +211,5 @@ public class OpenGlTest implements GLEventListener {
 //            inFullScreen = false;
 //        }
 //    }
-
 
 }

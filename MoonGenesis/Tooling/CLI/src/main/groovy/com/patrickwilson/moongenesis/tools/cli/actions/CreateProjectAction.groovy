@@ -1,13 +1,11 @@
 package com.patrickwilson.moongenesis.tools.cli.actions
 
-import com.google.common.base.Strings
 import com.google.common.collect.ImmutableMap
 import com.patrickwilson.cli.actions.ActionExecutionException
 import com.patrickwilson.cli.actions.ApplicationAction
 import com.patrickwilson.cli.actions.OutputWriter
 import com.patrickwilson.cli.actions.OptionBuilder
 import org.apache.commons.cli.CommandLine
-import org.apache.commons.cli.Option
 import org.apache.commons.cli.Options
 import org.apache.commons.io.IOUtils
 

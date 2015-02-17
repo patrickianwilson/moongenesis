@@ -3,5 +3,4 @@
   "main-scene":"scenes/main-scene",
   "controller":"sample.controllers.GameController"
 
-
 }
