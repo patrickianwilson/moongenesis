@@ -1,0 +1,5 @@
+include ":Service"  //this is a go project.  Currenlty the build is not linked.
+
+
+include ":Client:Linux-Desktop"
+include ":Client:Android"
