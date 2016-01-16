@@ -1,4 +1,0 @@
-moongenesis
-===========
-
-MOONGENESIS

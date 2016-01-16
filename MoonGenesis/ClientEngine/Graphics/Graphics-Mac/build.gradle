@@ -1,9 +1,0 @@
-apply from: "$rootProject.projectDir/config/gradle-templates/includes/java-client-conventions.gradle"
-
-
-dependencies {
-    compile fileTree(dir: "$rootProject.projectDir/Libraries/jogl/mac", include: "*.jar")
-    compile project (":MoonGenesis:ClientEngine:Graphics:Graphics-Core")
-    compile "com.google.code.gson:gson:2.2.4"
-
-}
