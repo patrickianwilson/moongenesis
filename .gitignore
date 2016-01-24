@@ -5,3 +5,5 @@
 #IDEA files
 *.iml
 /.idea
+
+//build/
