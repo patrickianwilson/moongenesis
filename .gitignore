@@ -1,3 +1,7 @@
 #go files
 
 *.a
+
+#IDEA files
+*.iml
+/.idea
