@@ -24,6 +24,7 @@ include ":Client:Web:WebInput"
 include ":Client:Web:WebBootstrap"
 
 include ":Client:Common:CommonManagers"
+include ":Client:Common:ClientComponentApis"
 
 include ":SDK:Preview"
 

@@ -27,4 +27,8 @@ dependencies {
         compile "org.eclipse.swt:org.eclipse.swt.gtk.linux.x86_64:$SWT_VERSION"
     else if (OperatingSystem.current().isMacOsX())
         compile "org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:$SWT_VERSION"
+
+
+    compile project(":Client:Common:ClientComponentApis")
+
 }
