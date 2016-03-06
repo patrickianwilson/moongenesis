@@ -3,10 +3,10 @@ include ":Service:UserService"  //this is a go project.  Currenlty the build is 
 include ":Service:ResourceService"  //this is a go project.  Currenlty the build is not linked.
 
 
-include ":Client:Android:AndroidAudio"
-include ":Client:Android:AndroidGraphics"
-include ":Client:Android:AndroidInput"
-include ":Client:Android:AndroidBootstrap"
+//include ":Client:Android:AndroidAudio"
+//include ":Client:Android:AndroidGraphics"
+//include ":Client:Android:AndroidInput"
+//include ":Client:Android:AndroidBootstrap"
 
 include ":Client:IOS:IOSAudio"
 include ":Client:IOS:IOSGraphics"
@@ -24,8 +24,11 @@ include ":Client:Web:WebInput"
 include ":Client:Web:WebBootstrap"
 
 include ":Client:Common:CommonManagers"
-include ":Client:Common:ClientComponentApis"
+include ":Client:Common:ClientComponentAPI"
+include ":Client:Common:GraphicsAPI"
 
 include ":SDK:Preview"
 
+
+include ":SampleGame"
 

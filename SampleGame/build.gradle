@@ -1,0 +1,5 @@
+apply from: "$rootProject.projectDir/config/gradle/includes/java-conventions.gradle"
+
+dependencies {
+    compile project (":Client:Desktop:DesktopGraphics")
+}
