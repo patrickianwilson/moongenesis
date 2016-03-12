@@ -1,0 +1,26 @@
+apply plugin: "application"
+repositories {
+    maven {
+        url "http://maven-eclipse.github.io/maven"
+    }
+}
+
+ext {
+    SWT_VERSION = "4.5.1"
+}
+
+dependencies {
+    //uncomment each platform you wish to support
+    if (org.gradle.internal.os.OperatingSystem.current().isWindows())
+        compile "org.eclipse.swt:org.eclipse.swt.win32.win32.x86_64:$SWT_VERSION"
+    else if (org.gradle.internal.os.OperatingSystem.current().isLinux())
+        compile "org.eclipse.swt:org.eclipse.swt.gtk.linux.x86_64:$SWT_VERSION"
+    else if (org.gradle.internal.os.OperatingSystem.current().isMacOsX())
+        compile "org.eclipse.swt:org.eclipse.swt.cocoa.macosx.x86_64:$SWT_VERSION"
+}
+
+if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
+    //on Cocoa, UI components MUST run on the main thread.
+    applicationDefaultJvmArgs= ["-XstartOnFirstThread"]
+}
+
