@@ -2,26 +2,21 @@ include ":Service:GameStateService"  //this is a go project.  Currenlty the buil
 include ":Service:UserService"  //this is a go project.  Currenlty the build is not linked.
 include ":Service:ResourceService"  //this is a go project.  Currenlty the build is not linked.
 
+include ":Client:Android:AndroidAudio"
+include ":Client:Android:AndroidGraphics"
+include ":Client:Android:AndroidInput"
 
-//include ":Client:Android:AndroidAudio"
-//include ":Client:Android:AndroidGraphics"
-//include ":Client:Android:AndroidInput"
-//include ":Client:Android:AndroidBootstrap"
-
-include ":Client:IOS:IOSAudio"
-include ":Client:IOS:IOSGraphics"
-include ":Client:IOS:IOSInput"
-include ":Client:IOS:IOSBootstrap"
+//include ":Client:IOS:IOSAudio"
+//include ":Client:IOS:IOSGraphics"
+//include ":Client:IOS:IOSInput"
 
 include ":Client:Desktop:DesktopAudio"
 include ":Client:Desktop:DesktopGraphics"
 include ":Client:Desktop:DesktopInput"
-include ":Client:Desktop:DesktopBootstrap"
 
 include ":Client:Web:WebAudio"
 include ":Client:Web:WebGraphics"
 include ":Client:Web:WebInput"
-include ":Client:Web:WebBootstrap"
 
 include ":Client:Common:CommonManagers"
 include ":Client:Common:ClientComponentAPI"
@@ -29,6 +24,6 @@ include ":Client:Common:GraphicsAPI"
 
 include ":SDK:Preview"
 
-
-include ":SampleGame"
+include ":SampleGame:Android"
+include ":SampleGame:Desktop"
 
