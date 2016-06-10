@@ -9,6 +9,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import com.jogamp.opengl.GLProfile;
+import com.patrickwilsonconsulting.moongenesis.client.DesktopComponentFactory;
 import com.patrickwilsonconsulting.moongenesis.client.common.api.EngineFactory;
 import com.patrickwilsonconsulting.moongenesis.client.common.api.exceptions.EngineStartupException;
 import com.patrickwilsonconsulting.moongenesis.client.common.api.window.DisplayReference;
@@ -25,7 +26,7 @@ public class MainBoot {
         DisplayReference<JFrame> display = PlatformDisplayReferenceUtils.createPlatformDefaultWindowedDisplay("Sample Game");
 
         JFrame mainWindow = display.getDefaultNativeDisplay();
-        mainWindow.getContentPane().add(new Engine3DGraphicsWidget(), BorderLayout.CENTER);
+        mainWindow.getContentPane().add(new Engine3DGraphicsWidget(DesktopComponentFactory.getDefaultInstance().getDefaultGraphicsRenderer()), BorderLayout.CENTER);
         mainWindow.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
