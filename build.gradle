@@ -1,4 +1,5 @@
+apply from: "$rootProject.projectDir/config/gradle/includes/java-conventions.gradle"
 
-task wrapper(type:Wrapper) {
-	gradleVersion='2.0'
+ext {
+    ANDROID_COMPAT_VERSION = "23.1.1"
 }

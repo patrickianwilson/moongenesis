@@ -1,0 +1,8 @@
+apply from: "$rootProject.projectDir/config/gradle/includes/java-conventions.gradle"
+apply from: "$rootProject.projectDir/config/gradle/includes/swt-conventions.gradle"
+
+dependencies {
+    compile project (":Client:Desktop:DesktopGraphics")
+}
+
+mainClassName = "com.github.patrickianwilson.moongensis.sample.MainBoot"

@@ -1,0 +1,15 @@
+import org.gradle.internal.os.OperatingSystem;
+
+apply from: "$rootProject.projectDir/config/gradle/includes/java-conventions.gradle"
+//apply from: "$rootProject.projectDir/config/gradle/includes/swt-conventions.gradle"
+
+ext {
+    joglVersion="2.3.1"
+}
+dependencies {
+
+    compile project(":Client:Common:ClientComponentAPI")
+    compile project(":Client:Common:GraphicsAPI")
+    compile group: 'org.jogamp.jogl', name: 'jogl-all-main', version: "$joglVersion"
+    compile "org.jogamp.gluegen:gluegen-rt-main:$joglVersion"
+}
