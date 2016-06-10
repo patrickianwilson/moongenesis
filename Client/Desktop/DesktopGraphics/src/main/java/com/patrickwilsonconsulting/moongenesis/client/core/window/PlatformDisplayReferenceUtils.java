@@ -1,32 +1,33 @@
 package com.patrickwilsonconsulting.moongenesis.client.core.window;
 
+import java.awt.*;
+import javax.swing.*;
 import com.patrickwilsonconsulting.moongenesis.client.common.api.window.DisplayReference;
-import com.patrickwilsonconsulting.moongenesis.client.desktop.window.SwtShellDisplayReference;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
+import com.patrickwilsonconsulting.moongenesis.client.desktop.window.SwingShellDisplayReference;
+
 
 /**
  * Created by pwilson on 3/5/16.
  */
 public class PlatformDisplayReferenceUtils {
 
-    public static DisplayReference createPlatformDefaultDisplay(String windowTitle) {
-        Display display = getDisplay(windowTitle);
-        Shell shell = new Shell(display);
-        shell.setText(windowTitle);
-        shell.open();
-
-        DisplayReference result = new SwtShellDisplayReference(shell);
+    public static DisplayReference<JFrame> createPlatformDefaultWindowedDisplay(String windowTitle) {
+        JFrame mainWindow = new JFrame(windowTitle);
+        mainWindow.setLayout(new BorderLayout());
+        DisplayReference result = new SwingShellDisplayReference(mainWindow, false);
 
         return result;
     }
 
-    private static Display getDisplay(String appName) {
+    public static DisplayReference<JFrame> createPlatformDefaultFullscreenDisplay(String windowTitle) {
+        JFrame mainWindow = new JFrame(windowTitle);
+        mainWindow.setLayout(new BorderLayout());
 
-        Display display = new Display();
-        Display.setAppName(appName);
+        DisplayReference result = new SwingShellDisplayReference(mainWindow, true);
 
-
-        return display;
+        return result;
     }
+
+
+
 }

@@ -6,7 +6,7 @@ package com.patrickwilsonconsulting.moongenesis.client.common.api.window;
  * a Window (Frame), on mobile this is an activity, on the web this is a html reference.
  *
  */
-public interface DisplayReference {
+public interface DisplayReference<T> {
 
     /**
      * called by the engine during initialization.  Usually this can be left empty.
@@ -24,4 +24,17 @@ public interface DisplayReference {
 
     boolean occupiesMainThread();
 
+
+    /**
+     * Return the native display that is used.  Useful for augmenting it.
+     * @return the underlying native display object.
+     */
+    T getDefaultNativeDisplay();
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    T getNamedNativeDisplay(Enum name);
 }
