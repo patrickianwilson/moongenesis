@@ -14,6 +14,8 @@ include ":Client:Desktop:DesktopAudio"
 include ":Client:Desktop:DesktopGraphics"
 include ":Client:Desktop:DesktopInput"
 
+include ":Client:NativeDesktop:NativeDesktopGraphics"
+
 include ":Client:Web:WebAudio"
 include ":Client:Web:WebGraphics"
 include ":Client:Web:WebInput"
