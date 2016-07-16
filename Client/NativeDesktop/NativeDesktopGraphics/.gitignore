@@ -1,0 +1,16 @@
+
+#cmake and other build files
+*.cmake
+Makefile
+CMakeFiles/
+CMakeCache.txt
+CMakeLists.txt.user
+
+#build artifacts
+NativeDesktopGraphicsBootstrap
+
+
+
+#intellij/CLion Files
+.idea
+*.iml

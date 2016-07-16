@@ -1,0 +1,15 @@
+//
+// Created by Patrick Wilson on 7/16/16.
+//
+
+#ifndef NATIVEDESKTOPGRAPHICS_DEFAULTNATIVEWINDOW_H
+#define NATIVEDESKTOPGRAPHICS_DEFAULTNATIVEWINDOW_H
+
+
+class DefaultNativeWindow {
+public:
+    void load();
+};
+
+
+#endif //NATIVEDESKTOPGRAPHICS_DEFAULTNATIVEWINDOW_H
