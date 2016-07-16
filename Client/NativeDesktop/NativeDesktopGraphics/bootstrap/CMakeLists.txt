@@ -6,5 +6,5 @@ set(SOURCE_FILES boot.cpp)
 
 add_executable(NativeDesktopGraphicsBoot ${SOURCE_FILES})
 
-target_link_libraries(NativeDesktopGraphicsBoot LINK_PUBLIC libWindow)
+target_link_libraries(NativeDesktopGraphicsBoot LINK_PUBLIC Window)
 

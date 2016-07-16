@@ -3,7 +3,6 @@
 *.cmake
 Makefile
 CMakeFiles/
-CMakeCache.txt
 CMakeLists.txt.user
 
 #build artifacts
